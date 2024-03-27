@@ -7,6 +7,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 
 import { PostCard } from '@/components/PostCard'
+import { useGithub } from '@/hooks/useGithub'
 
 import {
   FooterCard,
@@ -21,44 +22,38 @@ import {
 } from './styles'
 
 export function Home() {
+  const { user } = useGithub()
   const navigate = useNavigate()
 
   return (
     <MainContainer>
       <UserCard>
         <figure>
-          <img
-            src="https://img.freepik.com/fotos-gratis/retrato-de-homem-branco-isolado_53876-40306.jpg"
-            alt=""
-          />
+          <img src={user?.avatar_url} alt="" />
         </figure>
         <UserInfos>
           <TitleAndDescription>
             <header className="title">
-              <h3>Cameron Willianson</h3>
-              <a href="">
+              <h3>{user?.name}</h3>
+              <a target="_blank" href={user?.html_url} rel="noreferrer">
                 Github
                 <FaArrowUpRightFromSquare size={12} />
               </a>
             </header>
-            <p className="description">
-              Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-              viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-              volutpat pulvinar vel mass.
-            </p>
+            <p className="description">{user?.bio}</p>
           </TitleAndDescription>
           <FooterCard>
             <div className="icons">
               <FaGithub size={18} />
-              cameronvwll
+              {user?.login}
             </div>
             <div className="icons">
               <FaBuilding size={18} />
-              Rocketseat
+              {user?.company}
             </div>
             <div className="icons">
               <FaUserGroup size={18} />
-              32 seguidores
+              {user?.followers} seguidores
             </div>
           </FooterCard>
         </UserInfos>
