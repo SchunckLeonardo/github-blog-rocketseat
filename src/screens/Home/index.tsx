@@ -5,8 +5,11 @@ import {
   FaUserGroup,
 } from 'react-icons/fa6'
 
+import { PostCard } from '@/components/PostCard'
+
 import {
   FooterCard,
+  GridPostCard,
   MainContainer,
   SearchInput,
   SearchSection,
@@ -65,6 +68,12 @@ export function Home() {
         </SearchTitle>
         <SearchInput type="search" name="post" placeholder="Buscar conteúdo" />
       </SearchSection>
+
+      <GridPostCard>
+        {Array.from({ length: 10 }).map((item, i) => (
+          <PostCard key={i} />
+        ))}
+      </GridPostCard>
     </MainContainer>
   )
 }

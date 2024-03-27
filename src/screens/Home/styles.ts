@@ -4,6 +4,7 @@ export const MainContainer = styled.main`
   padding: 0 20%;
   display: flex;
   flex-direction: column;
+  padding-bottom: 200px;
 `
 
 export const UserCard = styled.div`
@@ -136,4 +137,12 @@ export const SearchInput = styled.input`
   &::placeholder {
     color: ${(p) => p.theme['base-label']};
   }
+`
+
+export const GridPostCard = styled.div`
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(2, 416px);
+  margin-top: 3rem;
+  justify-content: space-evenly;
 `
