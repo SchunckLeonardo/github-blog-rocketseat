@@ -34,6 +34,7 @@ export const UserInfos = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;
 `
 
 export const TitleAndDescription = styled.div`
@@ -61,6 +62,7 @@ export const TitleAndDescription = styled.div`
       color: ${(p) => p.theme.blue};
       text-transform: uppercase;
       border-bottom: 1px solid transparent;
+      cursor: pointer;
 
       &:hover {
         border-bottom: 1px solid ${(p) => p.theme.blue};

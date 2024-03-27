@@ -4,6 +4,7 @@ import {
   FaGithub,
   FaUserGroup,
 } from 'react-icons/fa6'
+import { useNavigate } from 'react-router-dom'
 
 import { PostCard } from '@/components/PostCard'
 
@@ -20,6 +21,8 @@ import {
 } from './styles'
 
 export function Home() {
+  const navigate = useNavigate()
+
   return (
     <MainContainer>
       <UserCard>
@@ -70,8 +73,8 @@ export function Home() {
       </SearchSection>
 
       <GridPostCard>
-        {Array.from({ length: 10 }).map((item, i) => (
-          <PostCard key={i} />
+        {Array.from({ length: 10 }).map((_, i) => (
+          <PostCard onClick={() => navigate(`/${i}`)} key={i} />
         ))}
       </GridPostCard>
     </MainContainer>
