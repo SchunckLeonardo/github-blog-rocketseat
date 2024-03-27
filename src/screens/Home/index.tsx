@@ -8,6 +8,9 @@ import {
 import {
   FooterCard,
   MainContainer,
+  SearchInput,
+  SearchSection,
+  SearchTitle,
   TitleAndDescription,
   UserCard,
   UserInfos,
@@ -54,6 +57,14 @@ export function Home() {
           </FooterCard>
         </UserInfos>
       </UserCard>
+
+      <SearchSection>
+        <SearchTitle>
+          <h3>Publicações</h3>
+          <span>6 publicações</span>
+        </SearchTitle>
+        <SearchInput type="search" name="post" placeholder="Buscar conteúdo" />
+      </SearchSection>
     </MainContainer>
   )
 }

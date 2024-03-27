@@ -59,6 +59,11 @@ export const TitleAndDescription = styled.div`
       text-decoration: none;
       color: ${(p) => p.theme.blue};
       text-transform: uppercase;
+      border-bottom: 1px solid transparent;
+
+      &:hover {
+        border-bottom: 1px solid ${(p) => p.theme.blue};
+      }
     }
   }
 
@@ -86,5 +91,49 @@ export const FooterCard = styled.footer`
     svg {
       color: ${(p) => p.theme['base-label']};
     }
+  }
+`
+
+export const SearchSection = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+`
+
+export const SearchTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  line-height: 160%;
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: ${(p) => p.theme['base-subtitle']};
+  }
+
+  span {
+    color: ${(p) => p.theme['base-span']};
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+`
+
+export const SearchInput = styled.input`
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid ${(p) => p.theme['base-border']};
+  background: ${(p) => p.theme['base-input']};
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 160%;
+  color: ${(p) => p.theme['base-text']};
+
+  &:focus {
+    border: 1px solid ${(p) => p.theme.blue};
+  }
+
+  &::placeholder {
+    color: ${(p) => p.theme['base-label']};
   }
 `
