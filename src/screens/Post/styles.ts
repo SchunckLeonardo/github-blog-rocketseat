@@ -17,9 +17,12 @@ export const TitlePost = styled(TitleAndDescription)`
 export const PostContentContainer = styled.section`
   padding: 2.5rem 2rem;
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
   color: ${(p) => p.theme['base-text']};
-  text-align: left;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 `
