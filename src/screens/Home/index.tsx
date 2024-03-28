@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from 'react'
 import {
   FaArrowUpRightFromSquare,
   FaBuilding,
@@ -7,6 +8,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 
 import { PostCard } from '@/components/PostCard'
+import { QueryResponse } from '@/context/GithubContext'
 import { useGithub } from '@/hooks/useGithub'
 
 import {
@@ -22,8 +24,19 @@ import {
 } from './styles'
 
 export function Home() {
-  const { user } = useGithub()
+  const [query, setQuery] = useState('')
+  const [issues, setIssues] = useState<QueryResponse>()
+  const { user, getAllIssues } = useGithub()
   const navigate = useNavigate()
+
+  const handleGetIssues = useCallback(async () => {
+    const response = await getAllIssues(query)
+    setIssues(response)
+  }, [getAllIssues, query])
+
+  useEffect(() => {
+    handleGetIssues()
+  }, [handleGetIssues])
 
   return (
     <MainContainer>
@@ -62,14 +75,27 @@ export function Home() {
       <SearchSection>
         <SearchTitle>
           <h3>Publicações</h3>
-          <span>6 publicações</span>
+          <span>{issues?.total_count} publicações</span>
         </SearchTitle>
-        <SearchInput type="search" name="post" placeholder="Buscar conteúdo" />
+        <SearchInput
+          onBlur={(e) => setQuery(e.target.value)}
+          type="search"
+          name="post"
+          placeholder="Buscar conteúdo"
+        />
       </SearchSection>
 
       <GridPostCard>
-        {Array.from({ length: 10 }).map((_, i) => (
-          <PostCard onClick={() => navigate(`/${i}`)} key={i} />
+        {issues?.items.map((issue) => (
+          <PostCard
+            key={issue.number}
+            onClick={() =>
+              navigate(`/${issue.number}`, {
+                state: issue,
+              })
+            }
+            {...issue}
+          />
         ))}
       </GridPostCard>
     </MainContainer>

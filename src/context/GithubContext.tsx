@@ -17,8 +17,24 @@ interface User {
   followers: number
 }
 
+interface Issue {
+  title: string
+  html_url: string
+  created_at: Date
+  body: string
+  number: number
+  user: User
+  comments: number
+}
+
+export interface QueryResponse {
+  total_count: number
+  items: Issue[]
+}
+
 interface GithubContextType {
   user: User | undefined
+  getAllIssues: (query?: string) => Promise<QueryResponse | undefined>
 }
 
 export const GithubContext = createContext({} as GithubContextType)
@@ -39,11 +55,24 @@ export function GithubContextProvider({
     setUser(response.data)
   }, [])
 
+  const getAllIssues = async (query?: string) => {
+    try {
+      const response = await axios.get<QueryResponse>(
+        `https://api.github.com/search/issues?q=${query}%20repo:schunckleonardo/github-blog-rocketseat`,
+      )
+      return response.data
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
     getUser()
   }, [getUser])
 
   return (
-    <GithubContext.Provider value={{ user }}>{children}</GithubContext.Provider>
+    <GithubContext.Provider value={{ user, getAllIssues }}>
+      {children}
+    </GithubContext.Provider>
   )
 }

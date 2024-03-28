@@ -1,23 +1,29 @@
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+
 import { PostCardContent } from './styles'
 
 interface PostCardProps {
   onClick: () => void
+  title: string
+  created_at: Date
+  body: string
 }
 
-export function PostCard({ onClick }: PostCardProps) {
+// eslint-disable-next-line camelcase
+export function PostCard({ onClick, title, created_at, body }: PostCardProps) {
   return (
     <PostCardContent onClick={onClick}>
       <div className="title">
-        <h2>JavaScript data types and data structures</h2>
-        <span>Há 1 dia</span>
+        <h2>{title}</h2>
+        <span>
+          {formatDistanceToNow(created_at, {
+            locale: ptBR,
+            addSuffix: true,
+          })}
+        </span>
       </div>
-      <p className="description">
-        Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in JavaScript and what properties
-        they have. These can be used to build other data structures. Wherever
-        possible, comparisons with other languages are drawn.
-      </p>
+      <p className="description">{body}</p>
     </PostCardContent>
   )
 }

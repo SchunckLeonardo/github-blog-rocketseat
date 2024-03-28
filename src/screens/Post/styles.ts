@@ -20,4 +20,6 @@ export const PostContentContainer = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  color: ${(p) => p.theme['base-text']};
+  text-align: left;
 `
